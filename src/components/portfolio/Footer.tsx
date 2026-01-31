@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="relative py-12 bg-card/50 backdrop-blur-sm border-t border-border/50">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-50" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Copyright */}
@@ -35,10 +35,7 @@ const Footer = () => {
           </div>
 
           {/* Built with */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>{t('footer.built')}</span>
-            <Heart className="h-4 w-4 text-red-500 animate-pulse" />
-          </div>
+
 
           {/* Scroll to top */}
           <motion.button

@@ -21,7 +21,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
+
       // Update active section based on scroll position
       const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
       for (const section of sections.reverse()) {
@@ -49,11 +49,20 @@ const Header = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
     setIsOpen(false);
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -61,11 +70,10 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? 'bg-background/70 backdrop-blur-xl shadow-soft border-b border-border/50'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -94,11 +102,10 @@ const Header = () => {
                   scrollToSection(item.href);
                 }}
                 whileHover={{ y: -2 }}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                  activeSection === item.id
+                className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${activeSection === item.id
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
                 {item.label}
                 {activeSection === item.id && (
@@ -228,11 +235,10 @@ const Header = () => {
                       e.preventDefault();
                       scrollToSection(item.href);
                     }}
-                    className={`block py-3 px-4 text-lg font-medium rounded-lg transition-colors ${
-                      activeSection === item.id
+                    className={`block py-3 px-4 text-lg font-medium rounded-lg transition-colors ${activeSection === item.id
                         ? 'text-primary bg-primary/10'
                         : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
-                    }`}
+                      }`}
                   >
                     {item.label}
                   </a>

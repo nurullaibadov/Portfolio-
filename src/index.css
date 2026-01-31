@@ -16,6 +16,7 @@
     --popover-foreground: 222 47% 11%;
 
     --primary: 217 91% 60%;
+    --primary-rgb: 68, 126, 242;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 14% 96%;
@@ -43,7 +44,7 @@
     --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.1);
     --shadow-card: 0 10px 40px -10px hsl(222 47% 11% / 0.1);
     --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
-    
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -113,6 +114,16 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    cursor: none;
+    /* Hide default cursor */
+  }
+
+  /* Restore default cursor for touch devices */
+  @media (hover: none) {
+    html {
+      cursor: auto;
+    }
   }
 }
 
@@ -168,42 +179,81 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(30px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes scaleIn {
-  from { 
+  from {
     opacity: 0;
     transform: scale(0.9);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(217 91% 60% / 0.3); }
-  50% { box-shadow: 0 0 40px hsl(217 91% 60% / 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsl(217 91% 60% / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsl(217 91% 60% / 0.5);
+  }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+.matrix-text-glow {
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
 }

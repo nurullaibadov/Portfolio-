@@ -63,7 +63,7 @@ export const translations: Translations = {
   
   // Footer
   'footer.rights': { en: 'All rights reserved.', az: 'Bütün hüquqlar qorunur.' },
-  'footer.built': { en: 'Built with React & TypeScript', az: 'React və TypeScript ilə qurulub' },
+  'footer.built': { en: '', az: '' },
 };
 
 interface LanguageContextType {

@@ -43,7 +43,7 @@ const Projects = () => {
     <section id="projects" className="py-20 lg:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.05),transparent_50%)]" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -68,84 +68,69 @@ const Projects = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <AnimatedSection key={index} delay={index * 0.15}>
-                <GlassCard className="h-full group">
-                  {/* Project Image/Icon */}
-                  <div className={`relative aspect-video bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
-                    <motion.span
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      className="text-7xl z-10"
-                    >
-                      {project.image}
-                    </motion.span>
-                    
-                    {/* Hover Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center gap-4"
-                    >
-                      <motion.a
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-primary text-primary-foreground rounded-full shadow-glow"
+                <div onClick={() => window.open(project.demo, '_blank')}>
+                  <GlassCard className="h-full group cursor-pointer hover:border-primary/80 transition-colors">
+                    {/* Project Image/Icon */}
+                    <div className={`relative aspect-video bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
+                      <motion.span
+                        whileHover={{ scale: 1.2, rotate: 10 }}
+                        className="text-7xl z-10"
                       >
-                        <ExternalLink className="h-5 w-5" />
-                      </motion.a>
-                      <motion.a
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-card border border-border rounded-full hover:border-primary"
+                        {project.image}
+                      </motion.span>
+
+                      {/* Hover Overlay */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center gap-4"
                       >
-                        <Github className="h-5 w-5" />
-                      </motion.a>
-                    </motion.div>
-                  </div>
+                        <span className="px-4 py-2 bg-primary text-primary-foreground rounded-full font-bold shadow-glow">
+                          View Project
+                        </span>
+                      </motion.div>
+                    </div>
 
-                  <div className="p-6">
-                    <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
-                      {project.title}
-                      <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-                    </h4>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
+                    <div className="p-6">
+                      <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
+                        {project.title}
+                        <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                      </h4>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        {project.description}
+                      </p>
 
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech, i) => (
-                        <Badge
-                          key={i}
-                          variant="secondary"
-                          className="text-xs backdrop-blur-sm"
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologies.map((tech, i) => (
+                          <Badge
+                            key={i}
+                            variant="secondary"
+                            className="text-xs backdrop-blur-sm"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      {/* GitHub Link (Stop propagation to prevent opening demo) */}
+                      <div className="flex gap-3 mt-auto">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          asChild
+                          className="hover:scale-105 transition-all backdrop-blur-sm z-20 relative"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          {tech}
-                        </Badge>
-                      ))}
+                          <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                            <Github className="h-4 w-4 mr-2" />
+                            {t('projects.code')}
+                          </a>
+                        </Button>
+                      </div>
                     </div>
-
-                    {/* Links */}
-                    <div className="flex gap-3">
-                      <Button size="sm" asChild className="bg-gradient-primary hover:opacity-90 hover:scale-105 transition-all">
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          {t('projects.demo')}
-                        </a>
-                      </Button>
-                      <Button size="sm" variant="outline" asChild className="hover:scale-105 transition-all backdrop-blur-sm">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="h-4 w-4 mr-2" />
-                          {t('projects.code')}
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </GlassCard>
+                  </GlassCard>
+                </div>
               </AnimatedSection>
             ))}
           </div>

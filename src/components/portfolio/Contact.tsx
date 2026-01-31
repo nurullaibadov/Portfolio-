@@ -21,12 +21,6 @@ const Contact = () => {
       value: 'Baku, Azerbaijan',
       href: null,
     },
-    {
-      icon: Phone,
-      label: t('contact.phone'),
-      value: '+994 55 258 19 01',
-      href: 'tel:+994552581901',
-    },
   ];
 
   const socialLinks = [
@@ -41,7 +35,7 @@ const Contact = () => {
       {/* Background */}
       <div className="absolute inset-0 bg-secondary/30" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
+
       {/* Floating Elements */}
       <motion.div
         animate={{ y: [-20, 20, -20], x: [-10, 10, -10] }}
@@ -53,7 +47,7 @@ const Contact = () => {
         transition={{ duration: 12, repeat: Infinity }}
         className="absolute bottom-1/4 right-10 w-60 h-60 bg-accent/10 rounded-full blur-3xl"
       />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}

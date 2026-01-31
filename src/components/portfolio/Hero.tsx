@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, Youtube, Mail, Download, ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import MagneticButton from '@/components/ui/MagneticButton';
+import GlitchText from '@/components/ui/GlitchText';
 import TypeWriter from './TypeWriter';
 import profileImage from '@/assets/profile-image.png';
 
@@ -16,7 +18,7 @@ const Hero = () => {
     { icon: Mail, href: 'mailto:ibadnurulla@gmail.com', label: 'Email' },
   ];
 
-  const roles = language === 'en' 
+  const roles = language === 'en'
     ? ['Senior Software Developer', 'Backend Developer', 'Software Instructor', 'Full Stack Developer']
     : ['Baş Proqram Tərtibatçısı', 'Backend Developer', 'Proqram Müəllimi', 'Full Stack Developer'];
 
@@ -37,7 +39,7 @@ const Hero = () => {
             rotate: [0, 90, 0],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute top-1/4 -left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+          className="absolute top-1/4 -left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl mix-blend-screen"
         />
         <motion.div
           animate={{
@@ -45,10 +47,17 @@ const Hero = () => {
             rotate: [90, 0, 90],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl mix-blend-screen"
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
-        
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px]"
+        />
+
         {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(var(--primary-rgb),0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--primary-rgb),0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
@@ -76,6 +85,9 @@ const Hero = () => {
                     transition={{ duration: 0.5 }}
                     src={profileImage}
                     alt="Nurulla Ibadov"
+                    loading="eager"
+                    width={320}
+                    height={320}
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
@@ -97,6 +109,7 @@ const Hero = () => {
             {/* Content */}
             <div className="flex-1 text-center lg:text-left">
               {/* Greeting */}
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -111,10 +124,11 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+                className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6"
               >
-                <span className="text-gradient">Nurulla</span>{' '}
-                <span className="text-foreground">Ibadov</span>
+                <span className="text-gradient">
+                  <GlitchText text="Nurulla Ibadov" />
+                </span>
               </motion.h1>
 
               {/* Animated Role */}
@@ -144,25 +158,30 @@ const Hero = () => {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10"
               >
-                <Button
-                  size="lg"
-                  className="group bg-gradient-primary hover:opacity-90 text-primary-foreground px-8 py-6 text-lg shadow-glow transition-all hover:shadow-xl hover:scale-105"
-                  onClick={scrollToProjects}
-                >
-                  {t('hero.cta')}
-                  <ArrowDown className="ml-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="group px-8 py-6 text-lg border-primary/30 hover:bg-primary/10 backdrop-blur-sm hover:scale-105 transition-all"
-                  asChild
-                >
-                  <a href="/Nurulla_Ibadov_Resume.pdf" download>
-                    <Download className="mr-2 h-5 w-5 group-hover:-translate-y-1 transition-transform" />
-                    {t('hero.download')}
-                  </a>
-                </Button>
+                <MagneticButton>
+                  <Button
+                    size="lg"
+                    className="group bg-gradient-primary hover:opacity-90 text-primary-foreground px-8 py-6 text-lg shadow-glow transition-all hover:shadow-xl hover:scale-105"
+                    onClick={scrollToProjects}
+                  >
+                    {t('hero.cta')}
+                    <ArrowDown className="ml-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
+                  </Button>
+                </MagneticButton>
+
+                <MagneticButton>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="group px-8 py-6 text-lg border-primary/30 hover:bg-primary/10 backdrop-blur-sm hover:scale-105 transition-all"
+                    asChild
+                  >
+                    <a href="/Nurulla_Ibadov_Resume.pdf" download>
+                      <Download className="mr-2 h-5 w-5 group-hover:-translate-y-1 transition-transform" />
+                      {t('hero.download')}
+                    </a>
+                  </Button>
+                </MagneticButton>
               </motion.div>
 
               {/* Social Links */}
